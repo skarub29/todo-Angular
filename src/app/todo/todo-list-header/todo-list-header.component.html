@@ -1,0 +1,14 @@
+<div class="header">
+  <h1>TodoList</h1>
+   <h2>New Task</h2>
+  <div class="create-task">
+    <input [(ngModel)]="inputValue" type="text">
+    <button (click)="addTask()">Add</button>
+    <select (click)=setValueSelect($event) name="filter" class="filter">
+      <option value="all">all</option>
+      <option value="completed">completed</option>
+      <option value="uncompleted">uncompleted</option>
+    </select>
+  </div>
+  <h2>Task List</h2>
+</div>

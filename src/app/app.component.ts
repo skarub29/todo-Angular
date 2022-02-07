@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+  tasks:any=[];
+  getArray(event:any):void{
+    this.tasks=event;
+  }
+  filterValue:string='';
+  getValueSelect(event:any):void{
+    this.filterValue=event;
+  }
 }

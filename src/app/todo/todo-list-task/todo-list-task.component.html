@@ -1,0 +1,38 @@
+
+<div  *ngFor="let task of (tasks) let i=index" class="task {{(task.completed ? true : '')}}"  (click)="searchIndexOfTask(i)">
+  <div  class="indexTask">
+    <div (click)="changePriority($event)" id="up" ></div>
+    <div  class="index">{{i+1}}</div>
+    <div (click)="changePriority($event)"id="down" ></div>
+  </div>
+  <div  class="text">{{task.content}}</div>
+  <input type="checkbox"  (click)="toggleCheckbox(i)">
+  <button class="edit"  (click)="editTask($event)">edit</button>
+  <button class="remove" (click)="removeTask($event)" [disabled]="disabled" >remove</button>
+  <div class="navigation " >
+    <div class="edit-block">
+      <p>Edit Task?</p>
+      <textarea>{{task.content}}</textarea>
+      <button (click)="editTaskText($event)">Yes</button>
+      <button (click)="cancelEdit($event)" >No</button>
+    </div>
+    <div  class="remove-block" >
+      <p>Delete task?</p>
+      <button (click)="deleteTaskFinish('yes',$event)">Yes</button>
+      <button (click)="deleteTaskFinish('no',$event)">No</button>
+    </div>
+  </div>
+</div>
+<!--<div *ngIf="condition;else remove"></div>-->
+
+
+
+<!--<ng-template #remove>
+  <div class="remove-block" >
+    <p>Delete task?</p>
+    <button (click)="deleteTaskFinish('yes')">Yes</button>
+    <button (click)="deleteTaskFinish('no')">No</button>
+  </div>
+</ng-template>
+
+-->

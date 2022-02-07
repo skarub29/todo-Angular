@@ -1,0 +1,87 @@
+.task{
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  height: auto;
+  max-width: 800px;
+  width: 100%;
+  .text{
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    max-width: 450px;
+    width: 100%;
+    font-size: 25px;
+    padding-left: 5px;
+    margin-right: 5px;
+  }
+  .edit{
+    margin:0 10px;
+  }
+  input{
+    width: 23px;
+    height: 23px;
+  }
+  .indexTask{
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 5px;
+    .index{
+      width: 24px;
+      height: auto;
+    }
+    #up{
+      height: 15px;
+      width: 15px;
+      transform: rotate(45deg);
+      border-top: 2px solid #000;
+      border-left: 2px solid #000;
+      cursor: pointer;
+    }
+    #down{
+      height: 15px;
+      width: 15px;
+      border-bottom: 2px solid #000;
+      border-left: 2px solid #000;
+      transform: rotate(-45deg);
+      cursor: pointer;
+    }
+  }
+
+}
+.task.true .text{
+  text-decoration: line-through;
+}
+
+  .navigation{
+    display: block;
+    margin-left:20px;
+  }
+  .remove-block{
+    display: none;
+  }
+ .edit-block{
+   display: none;
+    width: 220px;
+    height: 100px;
+   textarea{
+     margin: 0 auto 5px;
+     display: block;
+     width: 90%;
+     height: 50px;
+   }
+   p{
+     margin:3px 0;
+   }
+    button{
+      padding: 0 6px;
+      margin: 0 3px;
+      display: inline-block;
+    }
+  }
+ .navigation.hidden{
+   display: none;
+
+ }
+
+
+

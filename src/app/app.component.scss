@@ -1,0 +1,29 @@
+*{
+  box-sizing: border-box;
+}
+.container{
+  max-width: 1200px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+ align-items: center;
+
+}
+app-todo-list-header{
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+}
+app-todo-list-task{
+  max-width: 800px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
