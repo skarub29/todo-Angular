@@ -2,6 +2,8 @@ import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {stringify} from "@angular/compiler/src/util";
 import {formatNumber} from "@angular/common";
 import {elementAt} from "rxjs";
+import {TasksService} from "../services/tasks.service";
+import {Tasks} from "../models/tasks.model";
 
 @Component({
   selector: 'app-todo-list-task',
@@ -10,13 +12,20 @@ import {elementAt} from "rxjs";
 })
 export class TodoListTaskComponent   implements OnChanges,OnInit{
 
-  @Input() tasks:any=[]
+ tasks:Tasks[]=[]
   @Input() filterValue:string=''
 
-  ngOnInit() {
+  constructor(
+    private tasksService:TasksService
+  ) {
+  }
+
+  ngOnInit():void{
+    this.tasks=this.tasksService.initTasks()
 }
   conditionEdit:boolean=false;
   condition:boolean=false;
+
 
 
 
@@ -61,15 +70,18 @@ export class TodoListTaskComponent   implements OnChanges,OnInit{
 
   toggleCheckbox(i:any){
     this.tasks.forEach((value:any,index:any)=>{
-      if(i==index){
-        value.completed=!value.completed
-        if(value.completed==true){
-          this.tasks.splice(i,1);
-          this.tasks.push(value);
+      if(i===index) {
+       value.completed = !value.completed
+        if (value.completed === true) {
+          console.log(this.tasks[i])
+          this.tasksService.removeTask(i)
+          let taskText=value.content
+          this.tasksService.addTask({completed:value.completed,content: taskText})
+        } if (value.completed===false){
+          this.tasksService.removeTask(i)
+          this.tasksService.addTask({content: value.content, completed:value.completed})
         }
-
       }
-      return value;
     });
   }
 
@@ -137,7 +149,8 @@ removeTask(event:any){
 deleteTaskFinish(value:string,event:any):void{
   const target=event.target
   if(value==='yes'){
-    this.tasks.splice(this.indexOfTask,1)
+  //  this.tasks.splice(this.indexOfTask,1)
+    this.tasksService.removeTask(this.indexOfTask);
     this.condition=false
     target.parentElement.style.display='none'
     this.disabled='';
@@ -157,17 +170,17 @@ deleteTaskFinish(value:string,event:any):void{
 //ARRROWS===========================
 changePriority(event:any) {
   const index=event.target.parentElement.firstChild.nextSibling.innerText-1;
-  const indexPrevios=index-1;
+  const indexPrevious=index-1;
   const indexNext=index+1;
   const check=event.target.parentElement.parentElement.classList.contains("true");
  if(check){
    return;
  }else{
     if(event.target.id=="up"){
-      if(indexPrevios==-1){
+      if(indexPrevious==-1){
         return;
       }else{
-        [this.tasks[index],this.tasks[indexPrevios]]=[this.tasks[indexPrevios],this.tasks[index]];
+        [this.tasks[index],this.tasks[indexPrevious]]=[this.tasks[indexPrevious],this.tasks[index]];
       }
 
 

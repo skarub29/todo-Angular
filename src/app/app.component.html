@@ -1,6 +1,20 @@
-<div class="container">
-<app-todo-list-header (selectValue)="getValueSelect($event)"(mainArray)="getArray($event)"></app-todo-list-header>
-<app-todo-list-task [filterValue]="filterValue" [tasks]="tasks"></app-todo-list-task>
 
+<div class="container first">
+  <h1>Welcome</h1>
+  <form>
+    <div>
+      <p>Username:</p>
+      <input type="text">
+    </div>
+    <div>
+      <p>Age:</p>
+      <input type="text">
+    </div>
+  </form>
+  <button (click)="flipContainer($event)">Start</button>
+</div>
+<div class="container">
+<app-todo-list-header [userName]="userName" (selectValue)="getValueSelect($event)"></app-todo-list-header>
+<app-todo-list-task [filterValue]="filterValue" ></app-todo-list-task>
 </div>
 

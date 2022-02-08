@@ -1,4 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Tasks} from "../models/tasks.model";
+import {TasksService} from "../services/tasks.service";
 
 
 @Component({
@@ -6,19 +8,27 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
   templateUrl: './todo-list-header.component.html',
   styleUrls: ['./todo-list-header.component.scss']
 })
+
 export class TodoListHeaderComponent implements OnInit{
-  @Output() mainArray:EventEmitter<any>=new EventEmitter<any>();
+  @Input() userName:string='';
   ngOnInit() {
   }
 
-  tasks:any=[];
+  tasks:Tasks[]=[];
   inputValue: string='';
+
+  constructor(
+    public tasksService:TasksService
+  ) {
+  }
 
  addTask():void{
      const task=this.inputValue;
+     if (task==''){
+       return;
+     }
+   this.tasksService.addTask({completed:false,content: task})
      this.inputValue=''
-     this.tasks.push({completed:false,content: task})
-     this.mainArray.emit(this.tasks);
   }
 
 
